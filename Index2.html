@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				background-color: #ffffff;
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="http://threejsplaygnd.brangerbriz.net/js/three.min.js"></script>
+		<script src="http://threejsplaygnd.brangerbriz.net/js/Detector.js"></script>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			function setup() {
+
+				var W = window.innerWidth, H = window.innerHeight;
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize( W, H );
+				document.body.appendChild( renderer.domElement );
+
+				renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+				renderer.autoClearColor = false;
+
+				camera = new THREE.PerspectiveCamera( 50, W/H, 1, 10000 );
+				camera.position.z = 500;
+
+				scene = new THREE.Scene();
+
+
+				// paste your code from the geometryGUI here
+				map = THREE.ImageUtils.loadTexture('../texturez/proxy.php?url=');
+				geometry = new THREE.TorusKnotGeometry(128.25, 26.88, 54, 78, 9.5, 8.59, 1);
+				material = new THREE.MeshLambertMaterial({shading: THREE.SmoothShading, color: 0x000000, map: map, side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 3.66});
+				mesh = new THREE.Mesh(geometry, material);
+				map.wrapS = map.wrapT = THREE.RepeatWrapping;
+				map.repeat.set( 1, 1 );
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.88;
+				scene.add(mesh);
+
+
+			}
+
+			function draw() {
+
+				requestAnimationFrame( draw );
+
+				// experiment with code from the snippets menu here
+				var randomColor = Math.random() * 0xffffff;
+				mesh.material.color.setHex(randomColor);
+
+				mesh.position.x = Math.sin( Date.now() * 0.001 ) * 50;
+				mesh.rotation.z = Date.now() * 0.0005;
+
+				renderer.render( scene, camera );
+
+			}
+
+			setup();
+			draw();
+
+		</script>
+
+	</body>
+</html>
