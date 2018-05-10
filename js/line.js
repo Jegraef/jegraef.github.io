@@ -12,6 +12,6 @@ function draw() {
 
 if (mouseX <width/1) {
 
-  ellipse (mouseX, mouseY, 125, 125);
+  rect (mouseX, mouseY, 125, 125);
   }
 }
