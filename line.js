@@ -1,17 +1,17 @@
 function setup() {
   createCanvas (windowWidth, windowHeight);
-  strokeWeight(4);
+  strokeWeight(8);
 }
 
 function draw() {
   if (mouseX <300) {
-    stroke (255,0,0);
+    stroke (300,125,24);
   } else {
-    stroke(0);
+    stroke(2);
   }
 
-if (mouseX <width/2) {
+if (mouseX <width/1) {
 
-  ellipse (mouseX, mouseY, 30, 30);
+  ellipse (mouseX, mouseY, 125, 125);
   }
 }
